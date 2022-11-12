@@ -13,12 +13,12 @@ void test()
 {
   while(true)
   {
-    for(int i = 0; i <= circleSize1 - 30;i += 3)
+    for(int i = 0; i <= circleSize1 - 40;i += 3)
     {
       indecator.newSector(i);
       delay(20);
     } 
-    for(int i = circleSize1 - 30; i >= 0;i -= 3)
+    for(int i = circleSize1 - 40; i >= 0;i -= 3)
     {
       indecator.newSector(i);
       delay(20);

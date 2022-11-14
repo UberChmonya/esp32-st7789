@@ -1,11 +1,10 @@
 #include "Indicator.h" 
 
-Indicator::Indicator(Adafruit_ST7789* Screen, int* CirclePointX, int* CirclePointY, int const CircleSize, int SizeOfSector) : 
-circleSize(CircleSize),
-circlePointX(CirclePointX),
-circlePointY(CirclePointY),
+Indicator::Indicator(Adafruit_ST7789* Screen, circlePoint Circle, int SizeOfSector) : 
+circle(Circle),
 screen(Screen),
-sizeOfSector(SizeOfSector){}
+sizeOfSector(SizeOfSector),
+pixelPercent((Circle.size - SizeOfSector) / 100.0){}
 
 void Indicator::pixelForDeleteAndDraw(uint16_t startPixel) 
 {
@@ -37,8 +36,8 @@ void Indicator::deletePixel()
   for (int i = startDeletePixel; i < reDrawCount + startDeletePixel; i++)
   {
     screen->drawPixel(
-        circlePointX[i],
-        circlePointY[i],
+        circle.massiveX[i],
+        circle.massiveY[i],
         screen->color565(0, 0, 0));
   }
 }
@@ -48,15 +47,18 @@ void Indicator::drawPixel()
   for (int i = startDrawPixel; i < reDrawCount + startDrawPixel; i++)
   {
     screen->drawPixel(
-        circlePointX[i],
-        circlePointY[i],
+        circle.massiveX[i],
+        circle.massiveY[i],
         screen->color565(255, 255, 255));
   }
 }
 
 void Indicator::newSector(uint16_t newStart)
 {
-  pixelForDeleteAndDraw(newStart);
+  Serial.println(newStart);
+  Serial.println(pixelPercent);
+
+  pixelForDeleteAndDraw(newStart * pixelPercent);
   deletePixel();
   drawPixel();
 }

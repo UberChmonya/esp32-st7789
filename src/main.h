@@ -1,4 +1,4 @@
-
+#pragma once
 #include <Adafruit_ST7789.h> // Hardware-specific library for ST7789
 #include "Indicator.h"
 #include "circleMassive.h"
@@ -15,7 +15,7 @@
 #define TFT_RST 4
 #define TFT_MOSI 13 // Data out
 #define TFT_SCLK 14 // Clock out
-uint16_t sizeOfSector = 10;
-Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
 
-Indicator indecator = Indicator(&tft, circlePointX1, circlePointY1, circleSize1, 40);
+Adafruit_ST7789 display = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
+Indicator indecator1 = Indicator(&display, circle1, 40);
+Indicator indecator2 = Indicator(&display, circle2, 30);

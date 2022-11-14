@@ -1,13 +1,11 @@
 #pragma once
 #include <Arduino.h>
 #include <Adafruit_ST7789.h>
-
+#include "circleStruct.h"
 class Indicator
 {
     private:
-        int const circleSize;
-        int* circlePointX;
-        int* circlePointY;
+        circlePoint circle;
         Adafruit_ST7789* screen;
 
         void pixelForDeleteAndDraw(uint16_t startPixel);
@@ -21,8 +19,13 @@ class Indicator
         int newStartSector;
         int sizeOfSector;
 
+        float pixelPercent;
+
     public:
-        Indicator(Adafruit_ST7789* Screen, int* CirclePointX, int* CirclePointY, int const CircleSize, int SizeOfSector);
+        Indicator(
+        Adafruit_ST7789* Screen, 
+        circlePoint Circle, 
+        int SizeOfSector);
 
         void newSector(uint16_t newStart);
 };
